@@ -26,4 +26,31 @@ public class TrackNotificationTest {
 
     assertThat(message, is(notNullValue()));
   }
+
+  @Test
+  public void testTrackConvertedNotification_canDeserialize() throws IOException {
+    TrackConvertedNotification notification =
+        TrackConvertedNotification.builder(UUID.randomUUID(), "My title", "My filename", "My hash")
+            .build();
+
+    String json = TestUtils.getObjectMapper().writeValueAsString(notification);
+
+    TrackConvertedNotification message =
+        TestUtils.getObjectMapper().readValue(json, TrackConvertedNotification.class);
+
+    assertThat(message, is(notNullValue()));
+  }
+
+  @Test
+  public void testTrackConvertionFailedNotification_canDeserialize() throws IOException {
+    TrackConvertionFailedNotification notification =
+        TrackConvertionFailedNotification.builder(UUID.randomUUID(), "My reason").build();
+
+    String json = TestUtils.getObjectMapper().writeValueAsString(notification);
+
+    TrackConvertionFailedNotification message =
+        TestUtils.getObjectMapper().readValue(json, TrackConvertionFailedNotification.class);
+
+    assertThat(message, is(notNullValue()));
+  }
 }

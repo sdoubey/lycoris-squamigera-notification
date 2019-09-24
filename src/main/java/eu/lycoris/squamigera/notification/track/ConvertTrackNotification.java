@@ -16,6 +16,16 @@ public class ConvertTrackNotification extends Notification {
 
   public static final String SUBJECT = "CONVERT_TRACK_NOTIFICATION";
 
+  public static ConvertTrackNotificationBuilder builder(
+      @NonNull UUID id, @NonNull String title, @NonNull String fileName, @NonNull String fileHash) {
+    return new ConvertTrackNotificationBuilder()
+        .subject(SUBJECT)
+        .id(id)
+        .title(title)
+        .fileName(fileName)
+        .fileHash(fileHash);
+  }
+
   private UUID id;
 
   private String title;
@@ -29,16 +39,6 @@ public class ConvertTrackNotification extends Notification {
   private Integer duration;
 
   private String coverUrl;
-
-  public static ConvertTrackNotificationBuilder builder(
-      @NonNull UUID id, @NonNull String title, @NonNull String fileName, @NonNull String fileHash) {
-    return new ConvertTrackNotificationBuilder()
-        .subject(SUBJECT)
-        .id(id)
-        .title(title)
-        .fileName(fileName)
-        .fileHash(fileHash);
-  }
 
   @Builder
   @JsonCreator
