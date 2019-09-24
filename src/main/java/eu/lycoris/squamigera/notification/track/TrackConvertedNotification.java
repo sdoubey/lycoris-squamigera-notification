@@ -23,11 +23,16 @@ public class TrackConvertedNotification implements LycorisSubjectMessage {
   public static final String SUBJECT = "TRACK_CONVERTED_NOTIFICATION";
 
   public static TrackConvertedNotificationBuilder builder(
-      @NonNull UUID id, @NonNull String title, @NonNull String fileName, @NonNull String fileHash) {
+      @NonNull UUID id,
+      @NonNull String title,
+      @NonNull String fileName,
+      @NonNull String sourceFileName,
+      @NonNull String fileHash) {
     return new TrackConvertedNotificationBuilder()
         .id(id)
         .title(title)
         .fileName(fileName)
+        .sourceFileName(sourceFileName)
         .fileHash(fileHash);
   }
 
@@ -36,6 +41,8 @@ public class TrackConvertedNotification implements LycorisSubjectMessage {
   @NonNull private String title;
 
   @NonNull private String fileName;
+
+  @NonNull private String sourceFileName;
 
   @NonNull private String fileHash;
 

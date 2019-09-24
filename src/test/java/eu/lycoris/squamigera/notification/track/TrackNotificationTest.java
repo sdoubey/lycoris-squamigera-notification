@@ -16,7 +16,8 @@ public class TrackNotificationTest {
   @Test
   public void testConvertTrackNotification_canDeserialize() throws IOException {
     ConvertTrackNotification notification =
-        ConvertTrackNotification.builder(UUID.randomUUID(), "My title", "My filename", "My hash")
+        ConvertTrackNotification.builder(
+                UUID.randomUUID(), "My title", "My filename", "My source filename", "My hash")
             .build();
 
     String json = TestUtils.getObjectMapper().writeValueAsString(notification);
@@ -30,7 +31,8 @@ public class TrackNotificationTest {
   @Test
   public void testTrackConvertedNotification_canDeserialize() throws IOException {
     TrackConvertedNotification notification =
-        TrackConvertedNotification.builder(UUID.randomUUID(), "My title", "My filename", "My hash")
+        TrackConvertedNotification.builder(
+                UUID.randomUUID(), "My title", "My filename", "My source filename", "My hash")
             .build();
 
     String json = TestUtils.getObjectMapper().writeValueAsString(notification);
