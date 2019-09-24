@@ -2,6 +2,8 @@ package eu.lycoris.squamigera.notification.track;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import eu.lycoris.spring.common.LycorisSubjectMessage;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -29,6 +31,7 @@ public class TrackConvertionFailedNotification implements LycorisSubjectMessage 
 
   @NonNull private String reason;
 
+  @JsonIgnore
   public String getSubject() {
     return SUBJECT;
   }
