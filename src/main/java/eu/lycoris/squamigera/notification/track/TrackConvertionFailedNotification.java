@@ -2,34 +2,34 @@ package eu.lycoris.squamigera.notification.track;
 
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
-import eu.lycoris.squamigera.notification.common.Notification;
+import eu.lycoris.spring.common.LycorisSubjectMessage;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.ToString;
 
 @Getter
-@ToString(callSuper = true)
-public class TrackConvertionFailedNotification extends Notification {
+@Builder
+@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+public class TrackConvertionFailedNotification implements LycorisSubjectMessage {
 
   public static final String SUBJECT = "TRACK_CONVERT_FAILED_NOTIFICATION";
 
   public static TrackConvertionFailedNotificationBuilder builder(
       @NonNull UUID id, @NonNull String reason) {
-    return new TrackConvertionFailedNotificationBuilder().subject(SUBJECT).id(id).reason(reason);
+    return new TrackConvertionFailedNotificationBuilder().id(id).reason(reason);
   }
 
-  private UUID id;
+  @NonNull private UUID id;
 
-  private String reason;
+  @NonNull private String reason;
 
-  @Builder
-  @JsonCreator
-  protected TrackConvertionFailedNotification(String subject, UUID id, String reason) {
-    super(subject);
-    this.id = id;
-    this.reason = reason;
+  public String getSubject() {
+    return SUBJECT;
   }
 }

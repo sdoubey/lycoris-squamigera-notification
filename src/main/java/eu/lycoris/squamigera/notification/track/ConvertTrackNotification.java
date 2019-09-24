@@ -2,37 +2,40 @@ package eu.lycoris.squamigera.notification.track;
 
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
-import eu.lycoris.squamigera.notification.common.Notification;
+import eu.lycoris.spring.common.LycorisSubjectMessage;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.ToString;
 
 @Getter
+@Builder
 @ToString(callSuper = true)
-public class ConvertTrackNotification extends Notification {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+public class ConvertTrackNotification implements LycorisSubjectMessage {
 
   public static final String SUBJECT = "CONVERT_TRACK_NOTIFICATION";
 
   public static ConvertTrackNotificationBuilder builder(
       @NonNull UUID id, @NonNull String title, @NonNull String fileName, @NonNull String fileHash) {
     return new ConvertTrackNotificationBuilder()
-        .subject(SUBJECT)
         .id(id)
         .title(title)
         .fileName(fileName)
         .fileHash(fileHash);
   }
 
-  private UUID id;
+  @NonNull private UUID id;
 
-  private String title;
+  @NonNull private String title;
 
-  private String fileName;
+  @NonNull private String fileName;
 
-  private String fileHash;
+  @NonNull private String fileHash;
 
   private String artistName;
 
@@ -40,24 +43,7 @@ public class ConvertTrackNotification extends Notification {
 
   private String coverUrl;
 
-  @Builder
-  @JsonCreator
-  protected ConvertTrackNotification(
-      String subject,
-      UUID id,
-      String title,
-      String fileName,
-      String fileHash,
-      String artistName,
-      Integer duration,
-      String coverUrl) {
-    super(subject);
-    this.id = id;
-    this.title = title;
-    this.fileName = fileName;
-    this.fileHash = fileHash;
-    this.artistName = artistName;
-    this.duration = duration;
-    this.coverUrl = coverUrl;
+  public String getSubject() {
+    return SUBJECT;
   }
 }
