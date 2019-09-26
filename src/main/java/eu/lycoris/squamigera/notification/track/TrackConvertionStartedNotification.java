@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import eu.lycoris.spring.common.LycorisSubjectMessage;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +18,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class TrackConvertionStartedNotification {
+public class TrackConvertionStartedNotification implements LycorisSubjectMessage {
 
   public static final String SUBJECT = "TRACK_CONVERTION_STARTED_NOTIFICATION";
 
