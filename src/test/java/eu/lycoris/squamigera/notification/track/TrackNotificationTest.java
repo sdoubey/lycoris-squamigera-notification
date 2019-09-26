@@ -14,7 +14,7 @@ import eu.lycoris.squamigera.notification.TestUtils;
 public class TrackNotificationTest {
 
   @Test
-  public void testConvertTrackNotification_canDeserialize() throws IOException {
+  public void testTrackAddedNotification_canDeserialize() throws IOException {
     TrackAddedNotification notification =
         TrackAddedNotification.builder(
                 UUID.randomUUID(), "My title", "My filename", "My source filename", "My hash")
@@ -65,6 +65,19 @@ public class TrackNotificationTest {
 
     TrackConvertionStartedNotification message =
         TestUtils.getObjectMapper().readValue(json, TrackConvertionStartedNotification.class);
+
+    assertThat(message, is(notNullValue()));
+  }
+
+  @Test
+  public void testTrackConvertionDelayedNotification_canDeserialize() throws IOException {
+    TrackConvertionDelayedNotification notification =
+        TrackConvertionDelayedNotification.builder(UUID.randomUUID()).build();
+
+    String json = TestUtils.getObjectMapper().writeValueAsString(notification);
+
+    TrackConvertionDelayedNotification message =
+        TestUtils.getObjectMapper().readValue(json, TrackConvertionDelayedNotification.class);
 
     assertThat(message, is(notNullValue()));
   }
