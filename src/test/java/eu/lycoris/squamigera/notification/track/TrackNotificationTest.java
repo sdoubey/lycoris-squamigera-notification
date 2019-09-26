@@ -15,15 +15,15 @@ public class TrackNotificationTest {
 
   @Test
   public void testConvertTrackNotification_canDeserialize() throws IOException {
-    ConvertTrackNotification notification =
-        ConvertTrackNotification.builder(
+    TrackAddedNotification notification =
+        TrackAddedNotification.builder(
                 UUID.randomUUID(), "My title", "My filename", "My source filename", "My hash")
             .build();
 
     String json = TestUtils.getObjectMapper().writeValueAsString(notification);
 
-    ConvertTrackNotification message =
-        TestUtils.getObjectMapper().readValue(json, ConvertTrackNotification.class);
+    TrackAddedNotification message =
+        TestUtils.getObjectMapper().readValue(json, TrackAddedNotification.class);
 
     assertThat(message, is(notNullValue()));
   }
@@ -52,6 +52,19 @@ public class TrackNotificationTest {
 
     TrackConvertionFailedNotification message =
         TestUtils.getObjectMapper().readValue(json, TrackConvertionFailedNotification.class);
+
+    assertThat(message, is(notNullValue()));
+  }
+
+  @Test
+  public void testTrackConvertionStartedNotification_canDeserialize() throws IOException {
+    TrackConvertionStartedNotification notification =
+        TrackConvertionStartedNotification.builder(UUID.randomUUID()).build();
+
+    String json = TestUtils.getObjectMapper().writeValueAsString(notification);
+
+    TrackConvertionStartedNotification message =
+        TestUtils.getObjectMapper().readValue(json, TrackConvertionStartedNotification.class);
 
     assertThat(message, is(notNullValue()));
   }

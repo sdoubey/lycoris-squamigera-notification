@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import eu.lycoris.spring.common.LycorisSubjectMessage;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,18 +17,15 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class TrackConvertionFailedNotification implements LycorisSubjectMessage {
+public class TrackConvertionStartedNotification {
 
-  public static final String SUBJECT = "TRACK_CONVERTION_FAILED_NOTIFICATION";
+  public static final String SUBJECT = "TRACK_CONVERTION_STARTED_NOTIFICATION";
 
-  public static TrackConvertionFailedNotificationBuilder builder(
-      @NonNull UUID id, @NonNull String reason) {
-    return new TrackConvertionFailedNotificationBuilder().id(id).reason(reason);
+  public static TrackConvertionStartedNotificationBuilder builder(@NonNull UUID id) {
+    return new TrackConvertionStartedNotificationBuilder().id(id);
   }
 
   @NonNull private UUID id;
-
-  @NonNull private String reason;
 
   @JsonIgnore
   public String getSubject() {

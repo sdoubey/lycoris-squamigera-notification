@@ -18,17 +18,17 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class ConvertTrackNotification implements LycorisSubjectMessage {
+public class TrackAddedNotification implements LycorisSubjectMessage {
 
-  public static final String SUBJECT = "CONVERT_TRACK_NOTIFICATION";
+  public static final String SUBJECT = "TRACK_ADDED_NOTIFICATION";
 
-  public static ConvertTrackNotificationBuilder builder(
+  public static TrackAddedNotificationBuilder builder(
       @NonNull UUID id,
       @NonNull String title,
       @NonNull String fileName,
       @NonNull String sourceFileName,
       @NonNull String fileHash) {
-    return new ConvertTrackNotificationBuilder()
+    return new TrackAddedNotificationBuilder()
         .id(id)
         .title(title)
         .fileName(fileName)
@@ -45,12 +45,6 @@ public class ConvertTrackNotification implements LycorisSubjectMessage {
   @NonNull private String sourceFileName;
 
   @NonNull private String fileHash;
-
-  private String artistName;
-
-  private Integer duration;
-
-  private String coverUrl;
 
   @JsonIgnore
   public String getSubject() {
