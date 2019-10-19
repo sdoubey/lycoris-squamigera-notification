@@ -29,6 +29,21 @@ public class TrackNotificationTest {
   }
 
   @Test
+  public void testTrackConvertionRequestedNotification_canDeserialize() throws IOException {
+    TrackConvertionRequestedNotification notification =
+        TrackConvertionRequestedNotification.builder(
+                UUID.randomUUID(), "My title", "My filename", "My source filename", "My hash")
+            .build();
+
+    String json = TestUtils.getObjectMapper().writeValueAsString(notification);
+
+    TrackConvertionRequestedNotification message =
+        TestUtils.getObjectMapper().readValue(json, TrackConvertionRequestedNotification.class);
+
+    assertThat(message, is(notNullValue()));
+  }
+
+  @Test
   public void testTrackConvertedNotification_canDeserialize() throws IOException {
     TrackConvertedNotification notification =
         TrackConvertedNotification.builder(
